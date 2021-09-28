@@ -6,12 +6,12 @@ import { publicRoutes } from '../routes';
 const AppRouter = () => {
   return (
     <Switch>
-      {publicRoutes.map(route =>
+      {publicRoutes.map(({ path, exact, component }) =>
         <Route
-          path={route.path}
-          exact={route.exact}
-          component={route.component}
-          key={route.path}
+          path={path}
+          exact={exact}
+          component={component}
+          key={path}
         />
       )}
 
