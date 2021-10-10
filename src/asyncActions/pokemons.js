@@ -1,18 +1,35 @@
 import axios from "axios"
-import { startLoad, getPokemons, errorLoad } from "../store/redusers/pokemonsReduser"
-// const api = `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`;
+import { getPokemons, startLoad, loadDetails } from "../store/redusers/pokemonsReduser"
+import { BASE_URL } from "../utils/consts"
 
-export const fetchPokemons = (url) => {
+
+export const fetchPokemons = (url, baseUrl = BASE_URL) => {
+
+
 
   return dispatch => {
     dispatch(startLoad())
-    axios.get(url)
+
+    axios.get(url, {
+      params: {
+        limit: 12
+      }
+    })
       .then(response => {
-        console.log(response.data);
+        const arr = [];
+        response.data.results.forEach(link => {
+          arr.push(axios.get(`${baseUrl}/${link.name}`))
+        });
+        Promise.all(arr).then(response => {
+          response.forEach(elem => {
+            dispatch(loadDetails(elem.data))
+          });
+        })
         return dispatch(getPokemons(response.data))
       })
+
       .catch(error => {
-        dispatch(errorLoad(error))
+        console.log(error);
       })
   }
 }

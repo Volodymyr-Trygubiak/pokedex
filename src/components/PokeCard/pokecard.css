@@ -1,11 +1,77 @@
 .poke-card {
-  max-width: 160px;
+  max-width: 300px;
   width: 100%;
-  height: 240px;
-  border: 1px solid black;
-  margin-bottom: 20px;
+  height: 370px;
+  margin: 0  5px 20px;
+  border-radius: 10px;
   text-align: center;
+  flex: 1 1 auto;
+  padding: 5px;
+  cursor: pointer;
+  transition: all .3s ease;
+  border: 2px solid black;
+}
+.poke-card:hover {
+  transform: scale(1.1);
 }
 .poke-name:first-letter {
   text-transform:capitalize;
 }
+
+.poke-image {
+  height: 50%;
+  width: 80%;
+}
+
+.rock {
+  background-color: #7e3737;
+}
+.ghost {
+  background-color: rgb(247, 247, 247);
+}
+.electric {
+  background-color: rgb(255, 255, 161);
+}
+.bug {
+  background-color: #F6D6A7;
+}
+.poison {
+  background-color: #e0a7f6;
+}
+.normal {
+  background-color: #F4F4F4;
+}
+.fairy {
+  background-color: rgba(255, 192, 203, 0.863);
+}
+.fire {
+  background-color: #ff806a;
+}
+.grass {
+  background-color:#b6ffb4;
+}
+.water {
+  background-color:#85edff;
+}
+.fighting {
+  background-color:#aab7c2;
+}
+.steel {
+  background-color:#6c7379;
+}
+.psychic {
+  background-color:#45ecba;
+}
+.ice {
+  background-color:#00c3ff;
+}
+.ground {
+  background-color:#af704b;
+}
+.dragon {
+  background-color:#541891;
+}
+.dark {
+  background-color:#292230;
+}
+

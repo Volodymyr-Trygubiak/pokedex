@@ -1,6 +1,8 @@
+import { LOAD_START, LOAD_SUCC, LOAD_ERR, LOAD_DETAILS } from '../../utils/consts'
+
 const defaultState = {
   pokemons: [],
-  pokeNames: [],
+  pokemonsDetail: [],
   isLoading: false,
   isError: false,
   error: '',
@@ -8,9 +10,7 @@ const defaultState = {
   next: '',
 };
 
-const LOAD_START = "LOAD_START"
-const LOAD_SUCC = "LOAD_SUCC"
-const LOAD_ERR = "LOAD_ERR"
+
 
 export const pokemonsReducer = (state = defaultState, action) => {
   switch (action.type) {
@@ -31,12 +31,25 @@ export const pokemonsReducer = (state = defaultState, action) => {
     case LOAD_ERR:
       return { ...state, isLoading: false, isError: true, error: action.payload.message }
 
+    case LOAD_DETAILS: 
+      return {
+        ...state, 
+        pokemonsDetail: [...state.pokemonsDetail, action.payload],
+        isLoading: false,
+        isError: false,
+        error: '',
+      }
+
     default:
       return state
 
   }
 }
 
-export const startLoad = (payload) => ({ type: LOAD_START })
+
+export const startLoad = () => ({ type: LOAD_START })
 export const getPokemons = (payload) => ({ type: LOAD_SUCC, payload })
 export const errorLoad = (payload) => ({ type: LOAD_ERR, payload })
+
+
+export const loadDetails = (payload) => ({ type: LOAD_DETAILS, payload })

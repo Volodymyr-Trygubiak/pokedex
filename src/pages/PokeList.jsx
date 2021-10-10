@@ -1,28 +1,37 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { fetchPokemons } from "../asyncActions/pokemons";
+
 import PokeCard from "../components/PokeCard/PokeCard";
+import PokeBtn from "../components/shared/PokeBtn/PokeBtn";
+
+import { BASE_URL } from "../utils/consts";
 
 const PokeList = () => {
   const dispatch = useDispatch();
-  const pokemons = useSelector(state => state.pokemons)
+  const { next, pokemonsDetail, isLoading } = useSelector(state => state.pokemonsStore)
 
 
   useEffect(() => {
-    dispatch(fetchPokemons('https://pokeapi.co/api/v2/pokemon?limit=12'));
-    console.log(pokemons);
-  }, [])
+    dispatch(fetchPokemons(BASE_URL));
+  }, [dispatch])
 
   return (
-    <div>
-      <div className='container'>
+    <div className='container'>
+      <div className='wrap'>
         <div className='cards-wrap'>
-          {pokemons.pokemons.map((pokemon, index) =>
-            <PokeCard name={pokemon.name} key={index} />
+          {pokemonsDetail.map((pokemon, index) =>
+            <PokeCard
+              id={pokemon.id}
+              name={pokemon.name}
+              image={pokemon.sprites.other.dream_world.front_default}
+              type={pokemon.types[0].type.name}
+              key={index} />
           )}
         </div>
+        <PokeBtn disabled={isLoading} onClick={() => dispatch(fetchPokemons(next))}>Load More</PokeBtn>
       </div>
-      <button onClick={() => dispatch(fetchPokemons(pokemons.next))}>next</button>
     </div>
   )
 }
