@@ -1,12 +1,11 @@
 import React from 'react'
 import './pokecard.css'
 
-const PokeCard = ({id, name, type, image }) => {
+const PokeCard = ({ name, type, image, onClick }) => {
   const pokeType = `poke-card ${type}`
 
   return (
-    <div className={pokeType}>
-      <p>{id}</p>
+    <div className={pokeType} onClick={onClick}>
       <img className='poke-image' src={image} alt={name} />
       <h4 className='poke-name'>{name}</h4>
       <span className='poke-type'>{type}</span>
