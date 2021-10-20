@@ -1,5 +1,5 @@
 import React from 'react'
-import './pokeBtn.css';
+import './pokeBtn.scss';
 
 const PokeBtn = ({children, type='button', onClick, disabled}) => {
   return (

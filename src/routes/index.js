@@ -7,6 +7,6 @@ import { LIST_ROUTE, INFO_ROUTE, ERROR_ROUTE } from '../utils/consts'
 
 export const publicRoutes = [
   { path: LIST_ROUTE, exact: true, component: PokeList },
-  { path: INFO_ROUTE , exact: true, component: PokeInfo },
+  { path: INFO_ROUTE + '/:id', component: PokeInfo },
   { path: ERROR_ROUTE, component: PokeError },
 ]

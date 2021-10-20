@@ -1,0 +1,38 @@
+.header {
+  box-sizing: content-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 60px;
+  padding: 0 15px;
+  margin-top: 0px;
+  background: linear-gradient(to bottom, #000000, #1b1b1b 100%);
+  border-bottom: 1px solid #333333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.back-route {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 15px;
+  color: #4b4b4b;
+  background: none;
+  border: none;
+  text-decoration: none;
+  font-size: 22px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.back-route:hover {
+  color: #6d6d6d;
+
+}
+
+.logo {
+  height: 90%;
+}

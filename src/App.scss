@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(59, 55, 55);
+}
+
+.App {
+  text-align: center;
+  margin: 0 auto;
+}
+.container {
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.wrap {
+  text-align: center;
+}
+
+.poke-img {
+  width: 100%;
+  max-width: 300px;
+  max-height: 250px;
+  margin: 0px 0 20px;
+  text-align: center;
+}
+
+.poke-info {
+  padding: 75px 15px 0;
+  text-align: center;
+}
+
+.poke-wrap {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  color: #f1f1f1;
+  border: 2px solid #5a5656;
+}
+
+
+.poke-title {
+  font-size: 26px;
+  color: #dd1c56;
+  text-align: center;
+  margin-bottom: 15px;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.poke-item {
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  padding: 5px;
+  border: 1px solid #5a5656;
+
+  .poke-param {
+    text-align: center;
+    display: block;
+    width: 80px;
+  }
+}
+
+.cards-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 0 -5px;
+  padding-top: 90px;
+}
+
+@media screen and (orientation: landscape) {
+  .poke-info {
+    display: flex;
+    justify-content: space-around;
+
+    .poke-img {
+      max-width: 500px;
+      max-height: 400px;
+    }
+    .poke-item {
+      text-align: left;
+      align-items: center;
+    }
+
+    .poke-wrap {
+      width: 50% ;
+    }
+  }
+}

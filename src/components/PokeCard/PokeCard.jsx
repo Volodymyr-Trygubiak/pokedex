@@ -1,5 +1,5 @@
 import React from 'react'
-import './pokecard.css'
+import './pokecard.scss'
 
 const PokeCard = ({ name, type, image, onClick }) => {
   const pokeType = `poke-card ${type}`

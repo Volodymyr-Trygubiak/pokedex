@@ -21,11 +21,20 @@ export const fetchPokemons = (url, baseUrl = BASE_URL) => {
           arr.push(axios.get(`${baseUrl}/${link.name}`))
         });
         Promise.all(arr).then(response => {
-          response.forEach(elem => {
-            dispatch(loadDetails(elem.data))
+          const arrPoke = response.map(elem => {
+            const pokemon = {
+              id: elem.data.id,
+              name: elem.data.name,
+              image: elem.data.sprites.other.dream_world.front_default,
+              type: elem.data.types[0].type.name
+            }
+            return pokemon
           });
+          return dispatch(loadDetails(arrPoke))
         })
         return dispatch(getPokemons(response.data))
+
+
       })
 
       .catch(error => {

@@ -1,7 +1,7 @@
-import { LOAD_START, LOAD_SUCC, LOAD_ERR, LOAD_DETAILS } from '../../utils/consts'
+import { LOAD_START, LOAD_SUCC, LOAD_ERR, LOAD_DETAILS, CLEAR } from '../../utils/consts'
 
 const defaultState = {
-  pokemons: [],
+  pokemonsList: [],
   pokemonsDetail: [],
   isLoading: false,
   isError: false,
@@ -20,7 +20,7 @@ export const pokemonsReducer = (state = defaultState, action) => {
     case LOAD_SUCC:
       return {
         ...state,
-        pokemons: [...state.pokemons, ...action.payload.results],
+        pokemonsList: [...state.pokemonsList, ...action.payload.results],
         isLoading: false,
         isError: false,
         error: '',
@@ -31,13 +31,25 @@ export const pokemonsReducer = (state = defaultState, action) => {
     case LOAD_ERR:
       return { ...state, isLoading: false, isError: true, error: action.payload.message }
 
-    case LOAD_DETAILS: 
+    case LOAD_DETAILS:
       return {
-        ...state, 
-        pokemonsDetail: [...state.pokemonsDetail, action.payload],
+        ...state,
+        pokemonsDetail: [...state.pokemonsDetail, ...action.payload],
         isLoading: false,
         isError: false,
         error: '',
+      }
+
+    case CLEAR:
+      return { 
+        ...state, 
+        pokemonsList: [],
+        pokemonsDetail: [],
+        isLoading: false,
+        isError: false,
+        error: '',
+        prev: '',
+        next: '', 
       }
 
     default:
@@ -51,5 +63,6 @@ export const startLoad = () => ({ type: LOAD_START })
 export const getPokemons = (payload) => ({ type: LOAD_SUCC, payload })
 export const errorLoad = (payload) => ({ type: LOAD_ERR, payload })
 
+export const clear = () => ({ type: CLEAR })
 
 export const loadDetails = (payload) => ({ type: LOAD_DETAILS, payload })
