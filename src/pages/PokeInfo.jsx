@@ -18,7 +18,7 @@ const PokeInfo = (props) => {
     if (id < 100) {
       return `0${id}`
     }
-
+    return id
   }
 
 
