@@ -1,42 +1,31 @@
 import axios from "axios"
-import { getPokemons, startLoad, loadDetails } from "../store/redusers/pokemonsReduser"
-import { BASE_URL } from "../utils/consts"
+import { getPokemons, startLoad, loadDetails, endLoad } from "../store/redusers/pokemonsReduser"
 
-
-export const fetchPokemons = (url, baseUrl = BASE_URL) => {
-
-
-
+export const fetchPokemons = (url, limit = 12) => {
   return dispatch => {
     dispatch(startLoad())
 
     axios.get(url, {
       params: {
-        limit: 12
+        limit: limit
       }
     })
       .then(response => {
-        const arr = [];
-        response.data.results.forEach(link => {
-          arr.push(axios.get(`${baseUrl}/${link.name}`))
-        });
-        Promise.all(arr).then(response => {
-          const arrPoke = response.map(elem => {
-            const pokemon = {
-              id: elem.data.id,
-              name: elem.data.name,
-              image: elem.data.sprites.other.dream_world.front_default,
-              type: elem.data.types[0].type.name
+        Promise.all(
+          response.data.results.map(async (link) => {
+            const { data: pokemon } = await axios.get(link.url)
+            const pokemons = {
+              id: pokemon.id,
+              name: link.name,
+              image: pokemon.sprites.other.dream_world.front_default,
+              type: pokemon.types[0].type.name
             }
-            return pokemon
-          });
-          return dispatch(loadDetails(arrPoke))
-        })
+            return pokemons
+          }))
+          .then(res => dispatch(loadDetails(res)))
+          dispatch(endLoad())
         return dispatch(getPokemons(response.data))
-
-
       })
-
       .catch(error => {
         console.log(error);
       })

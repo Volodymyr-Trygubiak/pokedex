@@ -8,7 +8,6 @@ export const fetchPokemonInfo = (id, baseUrl = BASE_URL) => {
   return dispatch => {
     axios.get(`${baseUrl}/${id}`)
       .then(response => {
-        console.log(response.data);
         const info = {
           id: response.data.id,
           name: response.data.name,
